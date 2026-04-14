@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-bg: #050505;
+  --color-border-subtle: #222;
+}
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-white antialiased selection:bg-white selection:text-black overflow-x-hidden;
+  }
+}
+
+/* Hide the default annoying cursor on desktop class devices since we have a custom one */
+@media (pointer: fine) {
+  body, a, button, input {
+    cursor: none !important;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+
+@font-face {
+    font-family: f1;
+    src: url(./assets/Inter/static/Inter_28pt-Medium.ttf);
+}
+@font-face {
+    font-family: f2;
+    src: url(./assets/Inter/static/Inter_28pt-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: f3;
+    src: url(./assets/Inter/static/Inter_28pt-Light.ttf);
+}
+
+@font-face {
+    font-family: f4;
+    src: url(./assets/Inter/static/Inter_28pt-Regular.ttf);
+}
+
+@font-face {
+    font-family: f5;
+    src: url(./assets/Inter/static/Inter_28pt-Bold.ttf);
+}
+
+@font-face {
+    font-family: f6;
+    src: url(./assets/Wix_Madefor_Text/static/WixMadeforText-Medium.ttf);
+}
+
+/* Minimal Frosted Scrollbar Aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Infinite Smooth Project Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+.pause-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Quick Glitch Transition Effect */
+.glitch-active {
+  animation: glitch-skew 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  text-shadow: 2px 0 #3b82f6, -2px 0 #ef4444;
+  color: white;
+}
+@keyframes glitch-skew {
+  0% { transform: skew(0deg) translate(0); }
+  20% { transform: skew(-20deg) translate(-2px, 2px); }
+  40% { transform: skew(20deg) translate(-2px, -2px); opacity: 0.8; }
+  60% { transform: skew(-10deg) translate(2px, 2px); opacity: 0.5; }
+  80% { transform: skew(10deg) translate(2px, -2px); }
+  100% { transform: skew(0deg) translate(0); opacity: 1; }
+}
+
