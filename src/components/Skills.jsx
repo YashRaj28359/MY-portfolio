@@ -151,7 +151,7 @@ const Skills = () => {
             <p className="text-gray-400 font-[f3] leading-relaxed mb-8">
               I specialize in full-stack web development with a strong emphasis on frontend aesthetics and performance. 
               <br/><br/>
-              <span className="text-gray-200 uppercase tracking-widest text-xs border border-gray-600 px-3 py-1 rounded-full">Skill Bowl</span>
+              <span className="text-gray-200 uppercase tracking-widest text-xs border border-gray-600 px-3 py-1 rounded-full">Skills</span>
             </p>
           </motion.div>
         </div>

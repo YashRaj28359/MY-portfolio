@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import AllProjects from './components/AllProjects';
+import ProjectDetail from './components/ProjectDetail';
 import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion';
@@ -93,6 +94,7 @@ const App = () => {
         } />
         
         <Route path="/all-projects" element={<AllProjects />} />
+        <Route path="/project/:projectId" element={<ProjectDetail />} />
       </Routes>
     </div>
   );

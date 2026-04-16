@@ -69,75 +69,79 @@ const ProjectCard = ({ project, index }) => {
   };
 
   return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 100 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      style={{
-        rotateX,
-        rotateY,
-        transformPerspective: 1200,
-      }}
-      className="group relative perspective-1000"
-    >
-      <div className="w-full aspect-[16/10] md:aspect-[16/9] border border-border-subtle rounded-2xl overflow-hidden mb-8 relative group">
-        {/* IMAGE */}
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-        />
+    <Link to={`/project/${project.id}`} className="block text-inherit no-underline">
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, delay: index * 0.1 }}
+        style={{
+          rotateX,
+          rotateY,
+          transformPerspective: 1200,
+        }}
+        className="group relative perspective-1000 cursor-pointer"
+      >
+        <div className="w-full aspect-[16/10] md:aspect-[16/9] border border-border-subtle rounded-2xl overflow-hidden mb-8 relative group">
+          {/* IMAGE */}
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+          />
 
-        {/* HOVER OVERLAY */}
-        <motion.div
-          style={{ translateZ: 70 }}
-          className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-6 backdrop-blur-[2px]"
-        >
-          <div className="flex gap-6">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-4 bg-white text-black rounded-full hover:scale-110 transition-transform"
-            >
-              <Code2 className="w-6 h-6" />
-            </a>
+          {/* HOVER OVERLAY */}
+          <motion.div
+            style={{ translateZ: 70 }}
+            className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-6 backdrop-blur-[2px]"
+          >
+            <div className="flex gap-6">
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="p-4 bg-white text-black rounded-full hover:scale-110 transition-transform"
+              >
+                <Code2 className="w-6 h-6" />
+              </a>
 
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-4 bg-white text-black rounded-full hover:scale-110 transition-transform"
-            >
-              <ExternalLink className="w-6 h-6" />
-            </a>
-          </div>
-        </motion.div>
-      </div>
-
-      <motion.div style={{ translateZ: 30 }} className="px-2">
-        <div className="flex gap-3 mb-4 flex-wrap">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-xs text-gray-400 uppercase tracking-wider font-[f1] border border-gray-800 px-3 py-1 rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="p-4 bg-white text-black rounded-full hover:scale-110 transition-transform"
+              >
+                <ExternalLink className="w-6 h-6" />
+              </a>
+            </div>
+          </motion.div>
         </div>
-        <h3 className="text-3xl font-[f5] mb-4 group-hover:text-white text-gray-300 transition-colors duration-300">
-          {project.title}
-        </h3>
-        <p className="text-gray-500 font-[f3] text-lg leading-relaxed max-w-xl">
-          {project.description}
-        </p>
+
+        <motion.div style={{ translateZ: 30 }} className="px-2">
+          <div className="flex gap-3 mb-4 flex-wrap">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-xs text-gray-400 uppercase tracking-wider font-[f1] border border-gray-800 px-3 py-1 rounded-full"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <h3 className="text-3xl font-[f5] mb-4 group-hover:text-white text-gray-300 transition-colors duration-300">
+            {project.title}
+          </h3>
+          <p className="text-gray-500 font-[f3] text-lg leading-relaxed max-w-xl">
+            {project.description}
+          </p>
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </Link>
   );
 };
 
