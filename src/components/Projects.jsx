@@ -1,52 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { ExternalLink, Code2, ChevronLeft, ChevronRight } from "lucide-react";
-import hostelHuntImg from "../assets/HH.png";
-
-const projects = [
-  {
-    title: "Hostel Hunt",
-    description:
-      "Hostel Hunt is a modern hostel discovery platform that helps users find, compare, and book affordable stays based on location, price, and ratings. It delivers a clean, fast, and intuitive experience with features like favorites, secure payments, and smart hostel browsing.",
-    tags: ["React", "Node.js"],
-    link: "https://hostel-hunt-rho.vercel.app/",
-    github: "https://github.com/YashRaj28359/Hostel-Hunt",
-    image: hostelHuntImg,
-  },
-  {
-    title: "Dark Mode Dashboard",
-    description:
-      "Analytics dashboard tailored for developers, featuring high contrast data visualization and deep black themes.",
-    tags: ["Next.js", "Tailwind", "Recharts"],
-    link: "#",
-    github: "#",
-        image:"https://static.vecteezy.com/system/resources/thumbnails/006/659/172/small/wireframe-perspective-grid-white-infinity-mesh-on-black-background-abstract-retro-style-illustration-vector.jpg"
-
-  },
-  {
-    title: "Terminal Portfolio",
-    description:
-      "A retro-inspired, fully functional mock terminal portfolio crafted exclusively with CSS and Vanilla JS.",
-    tags: ["JavaScript", "CSS", "HTML"],
-    link: "#",
-    github: "#",
-    image:"https://static.vecteezy.com/system/resources/thumbnails/006/659/172/small/wireframe-perspective-grid-white-infinity-mesh-on-black-background-abstract-retro-style-illustration-vector.jpg"
-  },
-  {
-    title: "Typeface Gallery",
-    description:
-      "Curated collection of minimal typefaces for modern web design, built with a heavy horizontal scrolling layout.",
-    tags: ["Framer Motion", "React"],
-    link: "#",
-    github: "#",
-        image:"https://static.vecteezy.com/system/resources/thumbnails/006/659/172/small/wireframe-perspective-grid-white-infinity-mesh-on-black-background-abstract-retro-style-illustration-vector.jpg"
-
-  },
-];
+import { Link } from "react-router-dom";
+import { projects } from "../data/projectsData";
 
 const Projects = () => {
   const scrollContainerRef = useRef(null);
   const isHoveredRef = useRef(false);
+  const touchStartXRef = useRef(0);
+  const touchStartTimeRef = useRef(0);
 
   // We duplicate the project array infinitely so it can scroll forever
   const loopingProjects = [...projects, ...projects, ...projects];
@@ -73,6 +35,31 @@ const Projects = () => {
 
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
+
+  // Touch swipe handling for mobile
+  const handleTouchStart = (e) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartTimeRef.current = Date.now();
+  };
+
+  const handleTouchEnd = (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchDuration = Date.now() - touchStartTimeRef.current;
+    const swipeDistance = touchStartXRef.current - touchEndX;
+    const swipeThreshold = 50; // Minimum distance to trigger a swipe
+    const swipeVelocity = swipeDistance / touchDuration; // pixels per millisecond
+
+    // Swipe left (next) or Swipe right (prev) with velocity consideration
+    if (Math.abs(swipeDistance) > swipeThreshold || Math.abs(swipeVelocity) > 0.5) {
+      if (swipeDistance > 0) {
+        // Swiped left - show next
+        scrollNext();
+      } else {
+        // Swiped right - show previous
+        scrollPrev();
+      }
+    }
+  };
 
   const scrollNext = () => {
     if (scrollContainerRef.current) {
@@ -119,12 +106,12 @@ const Projects = () => {
             </p>
           </div>
           <div className="flex items-center gap-6">
-            <a
-              href="#"
+            <Link
+              to="/all-projects"
               className="hidden md:block text-sm uppercase tracking-widest text-gray-400 hover:text-white transition-colors border-b border-gray-800 hover:border-white pb-1 ml-4"
             >
-              View Archive
-            </a>
+              See All Projects
+            </Link>
           </div>
         </motion.div>
 
@@ -142,6 +129,8 @@ const Projects = () => {
             ref={scrollContainerRef}
             className="flex overflow-x-auto gap-6 md:gap-12 px-6 md:px-12 py-8 no-scrollbar"
             style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
             {loopingProjects.map((project, index) => (
               <ProjectCard

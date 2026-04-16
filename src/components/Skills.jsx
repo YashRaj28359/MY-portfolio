@@ -138,7 +138,7 @@ const Skills = () => {
       {/* Ambient Background Glow (Middle Right) */}
       <div className="absolute top-1/2 right-0 w-[60vw] h-[60vh] bg-gray-500/30 rounded-full blur-[140px] pointer-events-none translate-x-1/4 -translate-y-1/2 z-0" />
       
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-16 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-16 items-center md:items-start relative z-10">
         
         <div className="md:w-1/3 relative z-20 pointer-events-none">
           <motion.div
@@ -156,9 +156,9 @@ const Skills = () => {
           </motion.div>
         </div>
 
-        {/* Matter.js zero gravity container */}
+        {/* Desktop: Matter.js Skill Bowl */}
         <div
-          className="md:w-2/3 w-full h-[500px] md:h-[600px] border border-border-subtle rounded-t-3xl rounded-b-[6rem] bg-black/30 shadow-inner overflow-hidden relative select-none touch-none"
+          className="hidden md:block md:w-2/3 w-full h-[600px] border border-border-subtle rounded-t-3xl rounded-b-[6rem] bg-black/30 shadow-inner overflow-hidden relative select-none touch-none"
           ref={sceneRef}
         >
           {bodies.map(({ skill, id }) => {
@@ -189,6 +189,34 @@ const Skills = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* Mobile: Simple Skill List */}
+        <div className="md:hidden w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-2 gap-4"
+          >
+            {allSkills.map((skill, index) => (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className={`p-4 rounded-xl border text-center font-[f1] uppercase text-xs tracking-widest ${
+                  skill.type === 'light'
+                    ? 'bg-white/10 border-white/20 text-white'
+                    : 'bg-gray-900/30 border-gray-700/50 text-gray-300'
+                }`}
+              >
+                {skill.name}
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
 
       </div>

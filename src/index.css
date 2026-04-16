@@ -13,72 +13,93 @@
 
 /* Hide the default annoying cursor on desktop class devices since we have a custom one */
 @media (pointer: fine) {
-  body, a, button, input {
+
+  body,
+  a,
+  button,
+  input {
     cursor: none !important;
   }
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
+
 .animate-fade-in {
   animation: fade-in 0.5s ease-out;
 }
 
 
 @font-face {
-    font-family: f1;
-    src: url(./assets/Inter/static/Inter_28pt-Medium.ttf);
-}
-@font-face {
-    font-family: f2;
-    src: url(./assets/Inter/static/Inter_28pt-SemiBold.ttf);
+  font-family: f1;
+  src: url(./assets/Inter/static/Inter_28pt-Medium.ttf);
 }
 
 @font-face {
-    font-family: f3;
-    src: url(./assets/Inter/static/Inter_28pt-Light.ttf);
+  font-family: f2;
+  src: url(./assets/Inter/static/Inter_28pt-SemiBold.ttf);
 }
 
 @font-face {
-    font-family: f4;
-    src: url(./assets/Inter/static/Inter_28pt-Regular.ttf);
+  font-family: f3;
+  src: url(./assets/Inter/static/Inter_28pt-Light.ttf);
 }
 
 @font-face {
-    font-family: f5;
-    src: url(./assets/Inter/static/Inter_28pt-Bold.ttf);
+  font-family: f4;
+  src: url(./assets/Inter/static/Inter_28pt-Regular.ttf);
 }
 
 @font-face {
-    font-family: f6;
-    src: url(./assets/Wix_Madefor_Text/static/WixMadeforText-Medium.ttf);
+  font-family: f5;
+  src: url(./assets/Inter/static/Inter_28pt-Bold.ttf);
+}
+
+@font-face {
+  font-family: f6;
+  src: url(./assets/Wix_Madefor_Text/static/WixMadeforText-Medium.ttf);
 }
 
 /* Minimal Frosted Scrollbar Aesthetic */
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #050505;
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.4);
 }
 
 /* Infinite Smooth Project Marquee */
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
+
 .animate-marquee {
   animation: marquee 40s linear infinite;
 }
+
 .pause-marquee:hover {
   animation-play-state: paused;
 }
@@ -89,12 +110,209 @@
   text-shadow: 2px 0 #3b82f6, -2px 0 #ef4444;
   color: white;
 }
+
 @keyframes glitch-skew {
-  0% { transform: skew(0deg) translate(0); }
-  20% { transform: skew(-20deg) translate(-2px, 2px); }
-  40% { transform: skew(20deg) translate(-2px, -2px); opacity: 0.8; }
-  60% { transform: skew(-10deg) translate(2px, 2px); opacity: 0.5; }
-  80% { transform: skew(10deg) translate(2px, -2px); }
-  100% { transform: skew(0deg) translate(0); opacity: 1; }
+  0% {
+    transform: skew(0deg) translate(0);
+  }
+
+  20% {
+    transform: skew(-20deg) translate(-2px, 2px);
+  }
+
+  40% {
+    transform: skew(20deg) translate(-2px, -2px);
+    opacity: 0.8;
+  }
+
+  60% {
+    transform: skew(-10deg) translate(2px, 2px);
+    opacity: 0.5;
+  }
+
+  80% {
+    transform: skew(10deg) translate(2px, -2px);
+  }
+
+  100% {
+    transform: skew(0deg) translate(0);
+    opacity: 1;
+  }
 }
 
+/* Lightning Border Animation - Black/Silver Effect */
+@keyframes lightning-border {
+
+  0%,
+  100% {
+    border-color: rgba(0, 0, 0, 0.8);
+    box-shadow:
+      0 0 10px rgba(0, 0, 0, 0.6),
+      0 0 20px rgba(50, 50, 50, 0.3),
+      inset 0 0 8px rgba(255, 255, 255, 0.1);
+  }
+
+  25% {
+    border-color: rgba(30, 30, 30, 0.9);
+    box-shadow:
+      0 0 15px rgba(30, 30, 30, 0.8),
+      0 0 30px rgba(60, 60, 60, 0.4),
+      inset 0 0 12px rgba(255, 255, 255, 0.2);
+  }
+
+  50% {
+    border-color: rgba(80, 80, 80, 0.9);
+    box-shadow:
+      0 0 20px rgba(80, 80, 80, 0.9),
+      0 0 40px rgba(100, 100, 100, 0.5),
+      inset 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+
+  75% {
+    border-color: rgba(30, 30, 30, 0.8);
+    box-shadow:
+      0 0 12px rgba(30, 30, 30, 0.7),
+      0 0 25px rgba(50, 50, 50, 0.3),
+      inset 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes lightning-move {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  25% {
+    background-position: 100% 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  75% {
+    background-position: 0% 100%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+@keyframes silver-pulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    filter: brightness(0.8);
+  }
+
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.2);
+  }
+}
+
+.lightning-border {
+  position: relative;
+  border: 2px solid transparent;
+  animation: lightning-border 3s ease-in-out infinite;
+}
+
+.lightning-border::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(0, 0, 0, 0.7),
+      rgba(80, 80, 80, 0.9),
+      rgba(200, 200, 200, 0.8),
+      rgba(80, 80, 80, 0.9),
+      rgba(0, 0, 0, 0.7),
+      transparent);
+  background-size: 300% 100%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: lightning-move 4s linear infinite, silver-pulse 2s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+.lightning-border::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  background: linear-gradient(45deg,
+      transparent 20%,
+      rgba(0, 0, 0, 0.5) 40%,
+      rgba(150, 150, 150, 0.6) 50%,
+      rgba(0, 0, 0, 0.5) 60%,
+      transparent 80%);
+  background-size: 400% 400%;
+  border-radius: inherit;
+  z-index: -2;
+  animation: lightning-move 6s linear infinite reverse;
+  opacity: 0.4;
+  filter: blur(3px);
+}
+
+/* 3D Perspective Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+/* 3D List Animation */
+@keyframes float-3d {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotateY(0deg);
+  }
+
+  25% {
+    transform: translate3d(10px, -10px, 20px) rotateY(90deg);
+  }
+
+  50% {
+    transform: translate3d(0, -20px, 40px) rotateY(180deg);
+  }
+
+  75% {
+    transform: translate3d(-10px, -10px, 20px) rotateY(270deg);
+  }
+}
+
+.animate-float-3d {
+  animation: float-3d 10s ease-in-out infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .lightning-border {
+    border-width: 1.5px;
+  }
+
+  .lightning-border::before {
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+  }
+
+  .lightning-border::after {
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+  }
+}

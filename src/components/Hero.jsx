@@ -7,8 +7,8 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-24 pb-12 px-4 md:px-12 bg-white text-white">
       
-      {/* Large rounded Image Container */}
-      <div className="relative w-full max-w-8xl h-[85vh] min-h-[600px] rounded-[3rem] overflow-hidden flex items-center shadow-2xl">
+      {/* Large rounded Image Container with Lightning Border */}
+      <div className="relative w-full max-w-8xl h-[85vh] min-h-[600px] rounded-[3rem] overflow-hidden flex items-center shadow-2xl lightning-border">
         
         {/* The Image itself - placed to prioritize the face on the right, dark area on left */}
         {/* The Image itself - placed to prioritize the face on the right, dark area on left */}
