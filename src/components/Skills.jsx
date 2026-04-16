@@ -157,19 +157,19 @@ const Skills = () => {
         </div>
 
         {/* Matter.js zero gravity container */}
-        <div 
+        <div
           className="md:w-2/3 w-full h-[500px] md:h-[600px] border border-border-subtle rounded-t-3xl rounded-b-[6rem] bg-black/30 shadow-inner overflow-hidden relative select-none touch-none"
           ref={sceneRef}
         >
           {bodies.map(({ skill, id }) => {
             const isLight = skill.type === 'light';
             
-            const ballStyle = isLight 
+            const ballStyle = isLight
               ? {
                   background: 'radial-gradient(circle at 30% 30%, #ffffff, #d4d4d4, #737373)',
                   boxShadow: 'inset -5px -5px 15px rgba(0,0,0,0.3), 5px 5px 15px rgba(0,0,0,0.5), inset 2px 2px 5px rgba(255,255,255,0.8)',
                   color: '#000'
-                } 
+                }
               : {
                   background: 'radial-gradient(circle at 30% 30%, #3a3a3a, #151515, #000000)',
                   boxShadow: 'inset -5px -5px 15px rgba(0,0,0,0.9), 5px 5px 15px rgba(0,0,0,0.5)',
