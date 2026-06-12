@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Mail, MapPin, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, CheckCircle2, AlertCircle, Loader2, Phone, Shield } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const GithubIcon = () => (
@@ -10,13 +11,7 @@ const GithubIcon = () => (
   </svg>
 );
 
-const InstagramIcon = () => (
-  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-  </svg>
-);
+
 
 const Contact = () => {
   const [time, setTime] = useState(new Date());
@@ -153,37 +148,50 @@ const Contact = () => {
         </motion.div>
 
         {/* Footer Top border */}
-        <div className="mt-24 pt-8 border-t border-border-subtle flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-xl font-[f5] tracking-tighter text-white">
-            PORTFOLIO.
+        {/* Footer Top border */}
+        <div className="mt-24 pt-8 border-t border-border-subtle flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
+          {/* Left: Logo & Address stacked below */}
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <div className="text-xl font-[f5] tracking-tighter text-white">
+              YashRajTech
+            </div>
+            <div className="flex items-center gap-2 text-gray-500 text-sm font-[f4] text-center md:text-left">
+              <MapPin className="w-4 h-4 text-gray-600 flex-shrink-0" />
+              <span>Janjgir Champa, Chhattisgarh, Ward-9 Khokhsa, 495668</span>
+            </div>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-4 text-sm font-[f4] text-gray-400">
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yashrajsingh28359@gmail.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2 border border-gray-800 hover:border-gray-500 px-4 py-2 rounded-full cursor-none">
-              <Mail className="w-4 h-4" /> yashrajsingh28359@gmail.com
-            </a>
-            <a href="https://github.com/YashRaj28359" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2 border border-gray-800 hover:border-gray-500 px-4 py-2 rounded-full cursor-none flex-shrink-0">
-              <GithubIcon /> Github
-            </a>
-            <a href="https://instagram.com/sonic_16t" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2 border border-gray-800 hover:border-gray-500 px-4 py-2 rounded-full cursor-none flex-shrink-0">
-              <InstagramIcon /> Instagram
-            </a>
-            <span className="hidden md:flex items-center gap-2 border border-transparent px-4 py-2 text-gray-600">
-              <MapPin className="w-4 h-4" /> Remote / Earth
-            </span>
-          </div>
+          {/* Right: Links & Time Widget */}
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="flex flex-wrap justify-center gap-4 text-sm font-[f4] text-gray-400">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yashrajsingh28359@gmail.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2 border border-gray-800 hover:border-gray-500 px-4 py-2 rounded-full cursor-none">
+                <Mail className="w-4 h-4" /> yashrajsingh28359@gmail.com
+              </a>
+              <a href="tel:+919399886418" className="hover:text-white transition-colors flex items-center gap-2 border border-gray-800 hover:border-gray-500 px-4 py-2 rounded-full cursor-none flex-shrink-0">
+                <Phone className="w-4 h-4" /> +919399886418
+              </a>
+              <a href="https://github.com/YashRaj28359" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2 border border-gray-800 hover:border-gray-500 px-4 py-2 rounded-full cursor-none flex-shrink-0">
+                <GithubIcon /> Github
+              </a>
+              <Link to="/privacy" className="hover:text-white transition-colors flex items-center gap-2 border border-gray-800 hover:border-gray-500 px-4 py-2 rounded-full cursor-none flex-shrink-0">
+                <Shield className="w-4 h-4" /> Privacy Policy
+              </Link>
+            </div>
 
-          <div className="flex flex-col md:flex-row items-center gap-6 text-sm text-gray-500 font-[f4]">
-            <div className="flex items-center gap-3 border border-border-subtle rounded-full px-4 py-2 hover:border-gray-500 hover:text-white transition-colors">
+            <div className="flex items-center gap-3 border border-border-subtle rounded-full px-4 py-2 hover:border-gray-500 hover:text-white transition-colors text-sm text-gray-500 font-[f4]">
                <span className="relative flex h-2 w-2">
                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                </span>
                <span className="tracking-widest uppercase font-[f1] text-[10px] md:text-xs">{formattedTime} IST</span>
             </div>
-            <div className="text-gray-600">
-              © {new Date().getFullYear()} All rights reserved.
-            </div>
+          </div>
+        </div>
+
+        {/* Footer Bottom: Copyright in the middle bottom */}
+        <div className="mt-8 pt-8 border-t border-border-subtle/30 flex justify-center items-center text-sm text-gray-600 font-[f4]">
+          <div>
+            © 2026 Yash Raj Singh. All rights reserved.
           </div>
         </div>
       </div>

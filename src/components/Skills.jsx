@@ -106,11 +106,13 @@ const Skills = () => {
 
     // Create a headless runner 
     const runner = Runner.create();
-    Runner.run(runner, engine);
 
-    // Synchronize DOM elements manually via requestAnimationFrame
+    // Intersection Observer to start/stop the runner and animation loop only when visible
+    let isVisible = false;
     let animationFrame;
+
     const syncDOM = () => {
+      if (!isVisible) return;
       skillBodies.forEach((item) => {
         const domElement = document.getElementById(item.id);
         if (domElement) {
@@ -122,9 +124,24 @@ const Skills = () => {
       animationFrame = requestAnimationFrame(syncDOM);
     };
 
-    syncDOM();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          Runner.run(runner, engine);
+          syncDOM();
+        } else {
+          Runner.stop(runner);
+          cancelAnimationFrame(animationFrame);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(sceneRef.current);
 
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(animationFrame);
       Render.stop(engine);
       Runner.stop(runner);

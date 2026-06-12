@@ -47,6 +47,7 @@ const AllProjects = () => {
 // Reusable Project Card Component
 const ProjectCard = ({ project, index }) => {
   const cardRef = useRef(null);
+  const rectRef = useRef(null);
 
   // Motion values for capturing mouse locally to the card
   const x = useMotionValue(0);
@@ -56,14 +57,24 @@ const ProjectCard = ({ project, index }) => {
   const rotateX = useTransform(y, [-300, 300], [8, -8]);
   const rotateY = useTransform(x, [-300, 300], [-8, 8]);
 
+  const handleMouseEnter = () => {
+    if (cardRef.current) {
+      rectRef.current = cardRef.current.getBoundingClientRect();
+    }
+  };
+
   const handleMouseMove = (event) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
+    if (!rectRef.current) {
+      rectRef.current = cardRef.current ? cardRef.current.getBoundingClientRect() : null;
+    }
+    if (!rectRef.current) return;
+    const rect = rectRef.current;
     x.set(event.clientX - rect.left - rect.width / 2);
     y.set(event.clientY - rect.top - rect.height / 2);
   };
 
   const handleMouseLeave = () => {
+    rectRef.current = null;
     x.set(0);
     y.set(0);
   };
@@ -72,6 +83,7 @@ const ProjectCard = ({ project, index }) => {
     <Link to={`/project/${project.id}`} className="block text-inherit no-underline">
       <motion.div
         ref={cardRef}
+        onMouseEnter={handleMouseEnter}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         initial={{ opacity: 0, y: 100 }}

@@ -29,7 +29,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         <a href="#" className="text-xl font-[f5] tracking-tighter">
-          PORTFOLIO.
+          YashRajTech
         </a>
 
         {/* Desktop Nav */}

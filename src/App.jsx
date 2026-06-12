@@ -8,6 +8,7 @@ import Skills from './components/Skills';
 import Contact from './components/Contact';
 import AllProjects from './components/AllProjects';
 import ProjectDetail from './components/ProjectDetail';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion';
@@ -66,7 +67,7 @@ const App = () => {
       <CustomCursor />
       
       <motion.div 
-        className="fixed top-0 left-0 right-0 h-1 bg-white origin-left z-[100]" 
+         className="fixed top-0 left-0 right-0 h-1 bg-white origin-left z-[100]" 
         style={{ scaleX }} 
       />
       
@@ -95,6 +96,7 @@ const App = () => {
         
         <Route path="/all-projects" element={<AllProjects />} />
         <Route path="/project/:projectId" element={<ProjectDetail />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
       </Routes>
     </div>
   );

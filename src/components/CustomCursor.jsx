@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { motion, useSpring } from 'framer-motion';
+import { motion, useSpring, useMotionValue } from 'framer-motion';
 
 const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
+
+  // Exact pointer coordinate motion values to avoid re-renders
+  const mouseX = useMotionValue(-100);
+  const mouseY = useMotionValue(-100);
 
   // We use Framer Motion's useSpring to create the beautifully smooth lagging trailer effect
   const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
-  const cursorXSpring = useSpring(-100, springConfig);
-  const cursorYSpring = useSpring(-100, springConfig);
+  const cursorXSpring = useSpring(mouseX, springConfig);
+  const cursorYSpring = useSpring(mouseY, springConfig);
 
   useEffect(() => {
     const mouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-      
-      // Update spring trailers
-      cursorXSpring.set(e.clientX);
-      cursorYSpring.set(e.clientY);
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
     };
 
     const handleMouseOver = (e) => {
@@ -40,20 +40,23 @@ const CustomCursor = () => {
       window.removeEventListener('mousemove', mouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, [cursorXSpring, cursorYSpring]);
+  }, [mouseX, mouseY]);
 
   return (
     <>
       {/* Center solid precision dot (no delay, exact pointer coordination) */}
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 rounded-full bg-white z-[9999] pointer-events-none mix-blend-difference hidden md:block" // mix-blend helps visibility on both white and black sections
-        animate={{
-          x: mousePosition.x - 4, // 4 = half of 8px width
-          y: mousePosition.y - 4,
-          scale: isHovering ? 0 : 1, // Shrink to center when hovering link
-          opacity: 1
+        style={{
+          x: mouseX,
+          y: mouseY,
+          translateX: '-50%',
+          translateY: '-50%',
         }}
-        transition={{ type: "tween", duration: 0 }} // Intentionally 0 lag for true pointer mapping
+        animate={{
+          scale: isHovering ? 0 : 1, // Shrink to center when hovering link
+        }}
+        transition={{ type: "tween", duration: 0.15 }}
       />
 
       {/* Original crisp trailing boundary ring */}
